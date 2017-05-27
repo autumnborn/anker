@@ -26,7 +26,10 @@ public class Entry {
 		});
 		//System.exit(0);
 	}
-
+	
+	/**
+	 * Main class constructor
+	 */
 	public Entry() {
 		Path src = Paths.get(dir+"/src");
 		Path dst = Paths.get(dir+"/dst");
@@ -42,6 +45,13 @@ public class Entry {
 
 	}
 	
+	/**
+	 * Checks important directories exists in project folder 
+	 * @param src - Path to project sources folder
+	 * @param dst - Path to project destination folder
+	 * <p><strong>Note: </strong> If destination folder not exist, it will be made;
+	 * If source folder not exist, then exit.</p>
+	 */
 	private void checkDirs(Path src, Path dst) {
 		boolean result = false;
 		File dir = src.toFile();
@@ -56,6 +66,9 @@ public class Entry {
 		out.println( dir.getPath() + ((result) ? " | Created." : " | Skipped." ) );
 	}
 	
+	/**
+	 * Exit
+	 */
 	private void exit() {
 		System.exit(0);
 	}

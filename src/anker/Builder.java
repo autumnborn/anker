@@ -19,9 +19,15 @@ public class Builder {
 	
 	public Builder() {
 		// TODO Auto-generated constructor stub
-		
+		//-May be... Not now
 	}
 	
+	/**
+	 * Builds project
+	 * @param src - Path source directory
+	 * @param dst - Path destination directory
+	 * @throws IOException
+	 */
 	public void build(Path src, Path dst) throws IOException {
 		try {
 			findParts(src);
@@ -42,14 +48,27 @@ public class Builder {
 		
 	}
 	
+	/**
+	 * Gets project blocks paths list
+	 * @return List&lt;Path&gt;
+	 */
 	public List<Path> getBlocks(){
 		return blocks;
 	}
 	
+	/**
+	 * Gets project templates paths list
+	 * @return List&lt;Path&gt;
+	 */
 	public List<Path> getTemplates(){
 		return templates;
 	}	
 	
+	/**
+	 * Finds and sets project parts (blocks, templates) 
+	 * @param src
+	 * @throws IOException
+	 */
 	private void findParts(Path src) throws IOException {
 		Files.walkFileTree(src, new SimpleFileVisitor<Path>(){
 			@Override
@@ -65,17 +84,34 @@ public class Builder {
 		});
 	}
 
+	/**
+	 * Checks file for project-block prefix
+	 * @param filename String
+	 * @return boolean <code>true</code>, if file has prefix
+	 */
 	private boolean isBlock(String filename) {
 		Pattern pat = Pattern.compile("^ank\\..+");
 		Matcher m = pat.matcher(filename);
 		return m.matches();
 	}
 	
+	/**
+	 * Reads all file to String
+	 * @param path - Path, with filename
+	 * @return String file text
+	 * @throws IOException
+	 */
 	private String readText(Path path) throws IOException {
 		byte[] bytes = Files.readAllBytes(path);
 		return new String(bytes, StandardCharsets.UTF_8);
 	}
 	
+	/**
+	 * Writes text String to file
+	 * @param path - Path, with filename
+	 * @param content - String
+	 * @return boolean <code>true</code>, if success; <code>false</code>, if error
+	 */
 	public boolean writeText(Path path, String content) {
 		System.out.printf("Writing -> '%s'", path);
 		
@@ -86,7 +122,7 @@ public class Builder {
 			return false;
 		}
 		
-		System.out.printf("\tcomplete.\n");
+		System.out.printf(" complete.\n");
 		return true;
 	}
 }
