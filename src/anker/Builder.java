@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 public class Builder {
 	private List<Path> blocks = new ArrayList<Path>();
 	private List<Path> templates = new ArrayList<Path>();
+	private String blockTpl = "[%s]";
 	
 	public Builder() {
 		// TODO Auto-generated constructor stub
@@ -39,7 +40,7 @@ public class Builder {
 		for (Path tpl : templates) {
 			String content = readText(tpl);
 			for (Path block : blocks) {
-				String str = "[" + block.getFileName() + "]";
+				String str = String.format(blockTpl, block.getFileName());
 				content = content.replace(str, readText(block));
 			}
 			writeText(dst.resolve(tpl.getFileName()), content);
