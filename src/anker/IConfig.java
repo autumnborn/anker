@@ -1,7 +1,7 @@
 package anker;
 
 public interface IConfig {
-	String getConfigFile();
+	String getConfigFileLocation();
 	String getProjectDirectory();
 	String getBlockTpl();
 	String getSrcDirectory();

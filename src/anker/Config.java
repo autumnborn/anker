@@ -7,10 +7,14 @@ public class Config implements IConfig{
 	public String blockTpl = "[%s]";
 	private IConfig cfg;
 	
+	/**
+	 * Class constructor
+	 * @param args - command-line arguments
+	 */
 	public Config(String[] args) {
 		// TODO Auto-generated constructor stub
 		cfg = new ConfigCmd(args);
-		String configPath = cfg.getConfigFile();
+		String configPath = cfg.getConfigFileLocation();
 		if(configPath != null) {
 			cfg = new ConfigFile(configPath);
 		}
@@ -18,7 +22,7 @@ public class Config implements IConfig{
 	}
 
 	@Override
-	public String getConfigFile() {
+	public String getConfigFileLocation() {
 		// TODO Auto-generated method stub
 		return null;
 	}

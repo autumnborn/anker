@@ -6,13 +6,17 @@ import java.util.List;
 public class ConfigCmd implements IConfig {
 	private List<String> args;
 	
+	/**
+	 * Class constructor
+	 * @param args - command-line arguments
+	 */
 	public ConfigCmd(String[] args) {
 		// TODO Auto-generated constructor stub
 		this.args = Arrays.asList(args);
 	}
 	
 	@Override
-	public String getConfigFile() {
+	public String getConfigFileLocation() {
 		return getValue("-cfg");
 	}
 	

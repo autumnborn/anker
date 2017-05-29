@@ -30,8 +30,10 @@ public class Entry {
 	}
 	
 	/**
-	 * Main class constructor
+	 * Class constructor
+	 * @param config - Config class instance
 	 */
+	 
 	public Entry(Config config) {
 		this.dir = config.getProjectDirectory();
 		Path src = Paths.get(String.format("%s/%s", dir, config.getSrcDirectory()));

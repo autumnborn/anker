@@ -20,23 +20,27 @@ public class Builder {
 	private Path dst;
 	private String blockTpl;
 	
-	
+	/**
+	 * Class constructor
+	 * @param src - source directory path
+	 * @param dst - destination directory path
+	 * @param blockTpl - block-template
+	 */
 	public Builder(Path src, Path dst, String blockTpl) {
 		// TODO Auto-generated constructor stub
 		//-May be... Not now
 		this.blockTpl = blockTpl;
 		this.src = src;
 		this.dst = dst;
-//		System.out.println(this.blockTpl);
+		
 //		System.out.println(this.src);
 //		System.out.println(this.dst);
+//		System.out.println(this.blockTpl);
 //		System.exit(0);
 	}
 	
 	/**
 	 * Builds project
-	 * @param src - Path source directory
-	 * @param dst - Path destination directory
 	 * @throws IOException
 	 */
 	public void build() throws IOException {
