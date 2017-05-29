@@ -16,11 +16,21 @@ import java.util.regex.Pattern;
 public class Builder {
 	private List<Path> blocks = new ArrayList<Path>();
 	private List<Path> templates = new ArrayList<Path>();
-	private String blockTpl = "[%s]";
+	private Path src;
+	private Path dst;
+	private String blockTpl;
 	
-	public Builder() {
+	
+	public Builder(Path src, Path dst, String blockTpl) {
 		// TODO Auto-generated constructor stub
 		//-May be... Not now
+		this.blockTpl = blockTpl;
+		this.src = src;
+		this.dst = dst;
+//		System.out.println(this.blockTpl);
+//		System.out.println(this.src);
+//		System.out.println(this.dst);
+//		System.exit(0);
 	}
 	
 	/**
@@ -29,7 +39,7 @@ public class Builder {
 	 * @param dst - Path destination directory
 	 * @throws IOException
 	 */
-	public void build(Path src, Path dst) throws IOException {
+	public void build() throws IOException {
 		try {
 			findParts(src);
 		} catch (IOException e) {

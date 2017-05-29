@@ -10,14 +10,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Entry {
-	public String dir = "test"; //project directory
+	public String dir; //project directory
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Entry ent = new Entry();
+					Config config = new Config(args);
+					Entry ent = new Entry(config);
+					
 					//ent.test(args);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,14 +32,16 @@ public class Entry {
 	/**
 	 * Main class constructor
 	 */
-	public Entry() {
-		Path src = Paths.get(dir+"/src");
-		Path dst = Paths.get(dir+"/dst");
-		Builder builder = new Builder();
+	public Entry(Config config) {
+		this.dir = config.getProjectDirectory();
+		Path src = Paths.get(String.format("%s/%s", dir, config.getSrcDirectory()));
+		Path dst = Paths.get(String.format("%s/%s", dir, config.getDstDirectory()));
 		
+		checkDirs(src, dst);
+		Builder builder = new Builder(src, dst, config.getBlockTpl());
 		try {
-			checkDirs(src, dst);
-			builder.build(src, dst);
+			
+			builder.build();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
