@@ -54,4 +54,10 @@ public class ConfigFile implements IConfig {
 		return prop.getProperty("dir.dst");
 	}
 
+	@Override
+	public String getWatcherConfig() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

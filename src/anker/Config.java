@@ -1,10 +1,13 @@
 package anker;
 
 public class Config implements IConfig{
+	//default configuration values
 	public String dir = "test";
 	public String src = "src";
 	public String dst = "dst";
 	public String blockTpl = "[%s]";
+	public String watcherCfg = null;
+	//-------
 	private IConfig cfg;
 	
 	/**
@@ -49,6 +52,12 @@ public class Config implements IConfig{
 	public String getDstDirectory() {
 		// TODO Auto-generated method stub
 		return (cfg.getDstDirectory() != null) ? cfg.getDstDirectory() : this.dst;
+	}
+
+	@Override
+	public String getWatcherConfig() {
+		// TODO Auto-generated method stub
+		return (cfg.getWatcherConfig() != null) ? cfg.getWatcherConfig() : this.watcherCfg;
 	}
 	
 

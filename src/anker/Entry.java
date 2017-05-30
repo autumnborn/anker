@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import anker.fw.FolderWatcher;
+
+
 public class Entry {
 	public String dir; //project directory
 	
@@ -38,6 +41,8 @@ public class Entry {
 		this.dir = config.getProjectDirectory();
 		Path src = Paths.get(String.format("%s/%s", dir, config.getSrcDirectory()));
 		Path dst = Paths.get(String.format("%s/%s", dir, config.getDstDirectory()));
+		
+		
 		
 		checkDirs(src, dst);
 		Builder builder = new Builder(src, dst, config.getBlockTpl());

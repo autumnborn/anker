@@ -43,11 +43,18 @@ public class ConfigCmd implements IConfig {
 		// TODO Auto-generated method stub
 		return getValue("-dst");
 	}
-
+	
+	@Override
+	public String getWatcherConfig() {
+		// TODO Auto-generated method stub
+		return getValue("-watch");
+	}
+	
 	private String getValue(String key) {
 		int ptr = args.indexOf(key);
 		if(ptr == -1 || (ptr+1) > args.size()) return null;
 		ptr++;
 		return args.get(ptr);
 	}
+
 }

@@ -5,5 +5,6 @@ public interface IConfig {
 	String getProjectDirectory();
 	String getBlockTpl();
 	String getSrcDirectory();
-	String getDstDirectory();	
+	String getDstDirectory();
+	String getWatcherConfig();
 }
