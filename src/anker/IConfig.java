@@ -6,5 +6,6 @@ public interface IConfig {
 	String getBlockTpl();
 	String getSrcDirectory();
 	String getDstDirectory();
-	String getWatcherConfig();
+	boolean isWatchEnabled();
+	boolean isWatchTree();
 }

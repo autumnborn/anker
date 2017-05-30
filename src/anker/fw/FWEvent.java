@@ -5,7 +5,7 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.util.EventObject;
 
-class FWEvent extends EventObject {
+public class FWEvent extends EventObject {
 	private static final long serialVersionUID = 3827972947355505472L;
 	private WatchEvent<?> event;
 	private WatchKey key;

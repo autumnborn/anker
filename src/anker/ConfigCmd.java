@@ -45,9 +45,15 @@ public class ConfigCmd implements IConfig {
 	}
 	
 	@Override
-	public String getWatcherConfig() {
+	public boolean isWatchEnabled() {
 		// TODO Auto-generated method stub
-		return getValue("-watch");
+		return (args.indexOf("-w") != -1);
+	}
+	
+	@Override
+	public boolean isWatchTree() {
+		// TODO Auto-generated method stub
+		return (args.indexOf("-wt") != -1);
 	}
 	
 	private String getValue(String key) {
@@ -56,5 +62,6 @@ public class ConfigCmd implements IConfig {
 		ptr++;
 		return args.get(ptr);
 	}
+
 
 }

@@ -6,7 +6,8 @@ public class Config implements IConfig{
 	public String src = "src";
 	public String dst = "dst";
 	public String blockTpl = "[%s]";
-	public String watcherCfg = null;
+//	public boolean isWatchEnabled = false;
+//	public boolean isWatchTree = false;
 	//-------
 	private IConfig cfg;
 	
@@ -55,9 +56,15 @@ public class Config implements IConfig{
 	}
 
 	@Override
-	public String getWatcherConfig() {
+	public boolean isWatchEnabled() {
 		// TODO Auto-generated method stub
-		return (cfg.getWatcherConfig() != null) ? cfg.getWatcherConfig() : this.watcherCfg;
+		return cfg.isWatchEnabled();
+	}
+
+	@Override
+	public boolean isWatchTree() {
+		// TODO Auto-generated method stub
+		return cfg.isWatchTree();
 	}
 	
 

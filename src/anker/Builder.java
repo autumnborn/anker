@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class Builder {
 	private List<Path> blocks = new ArrayList<Path>();
 	private List<Path> templates = new ArrayList<Path>();
@@ -33,6 +32,13 @@ public class Builder {
 		this.src = src;
 		this.dst = dst;
 		
+		try {
+			findParts(src);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 //		System.out.println(this.src);
 //		System.out.println(this.dst);
 //		System.out.println(this.blockTpl);
@@ -44,13 +50,9 @@ public class Builder {
 	 * @throws IOException
 	 */
 	public void build() throws IOException {
-		try {
-			findParts(src);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		//building begin
+
+		findParts(src);
+
 		for (Path tpl : templates) {
 			String content = readText(tpl);
 			for (Path block : blocks) {
@@ -59,15 +61,15 @@ public class Builder {
 			}
 			writeText(dst.resolve(tpl.getFileName()), content);
 		}
-		//building end
-		
+
 	}
 	
 	/**
 	 * Gets project blocks paths list
 	 * @return List&lt;Path&gt;
+	 * @throws IOException 
 	 */
-	public List<Path> getBlocks(){
+	public List<Path> getBlocks() {
 		return blocks;
 	}
 	
@@ -85,6 +87,8 @@ public class Builder {
 	 * @throws IOException
 	 */
 	private void findParts(Path src) throws IOException {
+		blocks.clear();
+		templates.clear();
 		Files.walkFileTree(src, new SimpleFileVisitor<Path>(){
 			@Override
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {

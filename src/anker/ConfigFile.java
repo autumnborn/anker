@@ -55,9 +55,15 @@ public class ConfigFile implements IConfig {
 	}
 
 	@Override
-	public String getWatcherConfig() {
+	public boolean isWatchEnabled() {
 		// TODO Auto-generated method stub
-		return null;
+		return Boolean.valueOf(prop.getProperty("watch"));
+	}
+
+	@Override
+	public boolean isWatchTree() {
+		// TODO Auto-generated method stub
+		return Boolean.valueOf(prop.getProperty("watch.tree"));
 	}
 
 }

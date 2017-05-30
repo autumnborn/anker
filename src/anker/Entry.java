@@ -9,11 +9,15 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import anker.fw.FWEvent;
+import anker.fw.IFWEventListener;
 import anker.fw.FolderWatcher;
+
 
 
 public class Entry {
 	public String dir; //project directory
+	public FolderWatcher fw;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -22,7 +26,6 @@ public class Entry {
 				try {
 					Config config = new Config(args);
 					Entry ent = new Entry(config);
-					
 					//ent.test(args);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,25 +38,41 @@ public class Entry {
 	/**
 	 * Class constructor
 	 * @param config - Config class instance
+	 * @throws IOException 
 	 */
-	 
-	public Entry(Config config) {
+	public Entry(Config config) throws IOException {
 		this.dir = config.getProjectDirectory();
 		Path src = Paths.get(String.format("%s/%s", dir, config.getSrcDirectory()));
 		Path dst = Paths.get(String.format("%s/%s", dir, config.getDstDirectory()));
-		
-		
-		
 		checkDirs(src, dst);
 		Builder builder = new Builder(src, dst, config.getBlockTpl());
-		try {
-			
+		
+		System.out.println(config.isWatchEnabled());
+		
+		fw = new FolderWatcher();
+		fw.setKinds(true, true, true);
+		fw.addFWEventListener(new IFWEventListener() {
+			@Override
+			public void dirModifyEvent(FWEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					builder.build();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+	
+		if(config.isWatchEnabled()) {
+			fw.registerDirectory(src, config.isWatchTree());
+			fw.start();
+			consoleIn();
+			fw.stop();
+		} else {
 			builder.build();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
+		
 	}
 	
 	/**
@@ -84,6 +103,17 @@ public class Entry {
 		System.exit(0);
 	}
 	
+	private void consoleIn() {
+//		Console con = System.console();
+//		while(true) {
+//			String cmd = con.readLine();
+//			if(cmd.equals("quit")) break;
+//			out.println(cmd);
+//		}
+		while(true){	
+		}
+		
+	}
 //	private void test(String[] args) {
 //		out.println("anker");
 //		if(args.length != 0) {
