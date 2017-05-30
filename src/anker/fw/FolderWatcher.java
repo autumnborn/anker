@@ -156,7 +156,7 @@ public class FolderWatcher extends FWEventSet {
 	        @Override
 	        public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
 	            throws IOException {
-	                dir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
+	                dir.register(watcher, kinds);
 	        		return FileVisitResult.CONTINUE;
 	        }
 	    });

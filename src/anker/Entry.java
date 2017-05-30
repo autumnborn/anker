@@ -50,13 +50,16 @@ public class Entry {
 		System.out.println(config.isWatchEnabled());
 		
 		fw = new FolderWatcher();
-		fw.setKinds(true, true, true);
+		fw.setKinds(false, false, true);
 		fw.addFWEventListener(new IFWEventListener() {
 			@Override
 			public void dirModifyEvent(FWEvent e) {
 				// TODO Auto-generated method stub
 				try {
 					builder.build();
+					System.out.println(e.getKind());
+					System.out.println(e.getFilename());
+					System.out.println(e.getPath());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -64,8 +67,9 @@ public class Entry {
 			}
 		});
 	
-		if(config.isWatchEnabled()) {
+		if(true) {
 			fw.registerDirectory(src, config.isWatchTree());
+			System.out.println(config.isWatchTree());
 			fw.start();
 			consoleIn();
 			fw.stop();
@@ -107,7 +111,8 @@ public class Entry {
 //		Console con = System.console();
 //		while(true) {
 //			String cmd = con.readLine();
-//			if(cmd.equals("quit")) break;
+//			cmd.toLowerCase();
+//			if(cmd.equals("quit") || cmd.equals("q")) break;
 //			out.println(cmd);
 //		}
 		while(true){	

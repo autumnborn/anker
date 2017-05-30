@@ -2,7 +2,6 @@ package anker.fw;
 
 import javax.swing.event.EventListenerList;
 
-
 public class FWEventSet {
 	protected EventListenerList listenerList = new EventListenerList();
 
