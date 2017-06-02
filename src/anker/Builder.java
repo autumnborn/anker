@@ -27,7 +27,6 @@ public class Builder {
 	 */
 	public Builder(Path src, Path dst, String blockTpl) {
 		// TODO Auto-generated constructor stub
-		//-May be... Not now
 		this.blockTpl = blockTpl;
 		this.src = src;
 		this.dst = dst;
@@ -39,10 +38,6 @@ public class Builder {
 			e.printStackTrace();
 		}
 		
-//		System.out.println(this.src);
-//		System.out.println(this.dst);
-//		System.out.println(this.blockTpl);
-//		System.exit(0);
 	}
 	
 	/**

@@ -1,6 +1,7 @@
 package anker;
 
 import static java.lang.System.out;
+import static java.lang.System.err;
 
 import java.awt.EventQueue;
 import java.io.Console;
@@ -13,11 +14,8 @@ import anker.fw.FWEvent;
 import anker.fw.IFWEventListener;
 import anker.fw.FolderWatcher;
 
-
-
 public class Entry {
-	public String dir; //project directory
-	public FolderWatcher fw;
+	private String dir; //project directory
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -32,7 +30,7 @@ public class Entry {
 				}
 			}
 		});
-		//System.exit(0);
+
 	}
 	
 	/**
@@ -45,34 +43,30 @@ public class Entry {
 		Path src = Paths.get(String.format("%s/%s", dir, config.getSrcDirectory()));
 		Path dst = Paths.get(String.format("%s/%s", dir, config.getDstDirectory()));
 		checkDirs(src, dst);
+		
 		Builder builder = new Builder(src, dst, config.getBlockTpl());
 		
-		System.out.println(config.isWatchEnabled());
+		if(config.isWatchEnabled()) {
 		
-		fw = new FolderWatcher();
-		fw.setKinds(false, false, true);
-		fw.addFWEventListener(new IFWEventListener() {
-			@Override
-			public void dirModifyEvent(FWEvent e) {
-				// TODO Auto-generated method stub
-				try {
-					builder.build();
-					System.out.println(e.getKind());
-					System.out.println(e.getFilename());
-					System.out.println(e.getPath());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-	
-		if(true) {
+			FolderWatcher fw = new FolderWatcher();
+			fw.setKinds(false, false, true);
 			fw.registerDirectory(src, config.isWatchTree());
-			System.out.println(config.isWatchTree());
-			fw.start();
-			consoleIn();
-			fw.stop();
+			fw.addFWEventListener(new IFWEventListener() {
+				@Override
+				public void dirModifyEvent(FWEvent e) {
+					// TODO Auto-generated method stub
+					try {
+						builder.build();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			fw.start();	
+			keepMe();
+//			fw.stop();
+			
 		} else {
 			builder.build();
 		}
@@ -91,7 +85,7 @@ public class Entry {
 		File dir = src.toFile();
 		
 		if(!dir.isDirectory()) {
-			out.printf("Error: '%s' not exist. Stopped.\n", dir.getPath());
+			err.printf("Error: '%s' not exist. Stopped.\n", dir.getPath());
 			exit();
 		}
 		
@@ -107,11 +101,10 @@ public class Entry {
 		System.exit(0);
 	}
 	
-	private void consoleIn() {
+	private void keepMe() {
 //		Console con = System.console();
 //		while(true) {
-//			String cmd = con.readLine();
-//			cmd.toLowerCase();
+//			String cmd = con.readLine().toLowerCase();
 //			if(cmd.equals("quit") || cmd.equals("q")) break;
 //			out.println(cmd);
 //		}
@@ -119,26 +112,5 @@ public class Entry {
 		}
 		
 	}
-//	private void test(String[] args) {
-//		out.println("anker");
-//		if(args.length != 0) {
-//			for (String a : args) {
-//				out.println(a);
-//			}
-//		}
-//	
-//		Console con = System.console();
-//		con.printf("hello %s", 1);
-//
-//		while(true) {
-//			String cmd = con.readLine();
-//			if(cmd.equals("quit")) break;
-//			out.println(cmd);
-//		}
-//
-//		out.println("Quit.");
-//		out.println("---");
-//		System.exit(0);
-//	}
 
 }

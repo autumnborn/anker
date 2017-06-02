@@ -9,12 +9,7 @@ public class FWEvent extends EventObject {
 	private static final long serialVersionUID = 3827972947355505472L;
 	private WatchEvent<?> event;
 	private WatchKey key;
-	
-	public FWEvent(WatchEvent<?> event) {
-		super(event);
-		this.event = event;
-	}
-	
+
 	public FWEvent(WatchEvent<?> event, WatchKey key) {
 		super(event);
 		this.event = event;

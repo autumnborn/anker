@@ -80,7 +80,7 @@ public class FolderWatcher extends FWEventSet {
 			}
 		}
 		
-		if(!result.isEmpty()) this.kinds =  result.toArray(new Kind<?>[0]);
+		if(!result.isEmpty()) this.kinds = result.toArray(new Kind<?>[0]);
 	}
 	
 	/**
@@ -98,7 +98,7 @@ public class FolderWatcher extends FWEventSet {
 		if(create) kinds.add(ENTRY_CREATE);
 		if(delete) kinds.add(ENTRY_DELETE);
 		if(modify) kinds.add(ENTRY_MODIFY);
-		this.kinds =  kinds.toArray(new Kind<?>[0]);
+		this.kinds = kinds.toArray(new Kind<?>[0]);
 	}
 	
 	/**
@@ -201,10 +201,10 @@ public class FolderWatcher extends FWEventSet {
 			            System.err.println(x);
 			            continue;
 			        }
-			       
+			        
 			        fireDirModifyEvent(new FWEvent(event, key));
-			       
-			        System.out.format("--> %s%n", filename);
+			        
+			        //System.out.format("--> %s%n", filename);
 			        
 			    }
 
